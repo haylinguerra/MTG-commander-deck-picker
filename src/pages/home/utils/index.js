@@ -1,13 +1,18 @@
 export const getDeckList = async (playerList) => {
     const myHeaders = new Headers();
     myHeaders.append("Access-Control-Allow-Origin", "*");
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Accept-Encoding", "gzip, deflate, br");
+    myHeaders.append("Connection", "keep-alive");
+    myHeaders.append("Host", "api2.moxfield.com");
 
     const requestOptions = {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'
     };
-    
+
     const temp1 = fetch('https://api2.moxfield.com/v2/decks/search-sfw?pageNumber=1&pageSize=64&sortType=updated&sortDirection=Descending&fmt=commanderPrecons', requestOptions);
     const data = [];
     const response1 = await temp1;
