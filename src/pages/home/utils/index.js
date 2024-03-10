@@ -1,5 +1,14 @@
 export const getDeckList = async (playerList) => {
-    const temp1 = fetch('https://api2.moxfield.com/v2/decks/search-sfw?pageNumber=1&pageSize=64&sortType=updated&sortDirection=Descending&fmt=commanderPrecons');
+    const myHeaders = new Headers();
+    myHeaders.append("Access-Control-Allow-Origin", "*");
+
+    const requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+    };
+    
+    const temp1 = fetch('https://api2.moxfield.com/v2/decks/search-sfw?pageNumber=1&pageSize=64&sortType=updated&sortDirection=Descending&fmt=commanderPrecons', requestOptions);
     const data = [];
     const response1 = await temp1;
     const data1 = await response1.json();
