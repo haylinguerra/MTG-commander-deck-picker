@@ -3,9 +3,12 @@ import React from 'react';
 import { getDeckList } from './utils/index.js';
 
 const Home = () => {
+    const [playerList, setPlayerList] = React.useState('');
     const [deckList, setDeckList] = React.useState([]);
+
     const handleGenerateClick = async () => {
-        const generatedDecks = await getDeckList(['player1', 'player2', 'player3']);
+        const players = playerList.split(',');
+        const generatedDecks = await getDeckList(players);
         setDeckList(generatedDecks);
     };
 
@@ -17,12 +20,18 @@ const Home = () => {
                 generate a decklist for your favorite card game. To get started, add your players separated by "," no spaces and
                 click the button.
             </p>
-            <input type="text" placeholder="Player name list" />
+            <input
+                type="text"
+                value={playerList}
+                onChange={(e) => setPlayerList(e.target.value)}
+            />
             <button onClick={handleGenerateClick}>Generate Decklist</button>
             <ul>
-                {deckList.map((deck, index) => (
+                {deckList.map((deck, index) => ( 
                     <li key={index}>
-                        {Object.keys(deck)[0]}: {deck[Object.keys(deck)[0]]}
+                        {Object.keys(deck)[0]}: {deck[Object.keys(deck)].name} - <a href={
+                            deck[Object.keys(deck)].url
+                        }>Go</a>
                     </li>
                 ))}
             </ul>

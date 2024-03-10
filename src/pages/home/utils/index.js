@@ -15,8 +15,8 @@ export const getDeckList = async (playerList) => {
     }
     const decks = [];
     for (let i = 1; i <= playerList.length; i++) {
-        decks.push({[playerList[i - 1]]: data[Math.floor(Math.random() * data.length)
-        ].publicUrl});
+        const selectedDeck = data[Math.floor(Math.random() * data.length)];
+        decks.push({[playerList[i - 1]]: {name: selectedDeck.name, url: selectedDeck.publicUrl}});
     };
     return decks;
 };
